@@ -1,3 +1,9 @@
+''''
+List test:
+append(), clear(), copy(), count(), extend(), index(),
+insert(), pop(), remove(), reverse(), sort().
+'''
+
 a = []
 
 a.append(1)
@@ -28,7 +34,25 @@ print(a)
 print(a.index(222))
 print(a.index(3))
 
+a.insert(2, -10)
+print(a)
 
+a.pop()
+print(a)
+
+a.pop(0)
+print(a)
+
+a.remove(2)
+print(a)
+a.remove(123)
+print(a)
+
+a.reverse()
+print(a)
+
+a.sort()
+print(a)
 
 # append(), clear(), copy(), count(), extend(), index(),
 # insert(), pop(), remove(), reverse(), sort().
