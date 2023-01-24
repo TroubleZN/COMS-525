@@ -54,6 +54,4 @@ print(a)
 a.sort()
 print(a)
 
-# append(), clear(), copy(), count(), extend(), index(),
-# insert(), pop(), remove(), reverse(), sort().
 
