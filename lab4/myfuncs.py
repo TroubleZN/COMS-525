@@ -51,7 +51,7 @@ def sqrt_newton(x,kmax=100,initial_guess=1,tol=1e-14,printhow=0):
            kmax: integer, the maximum number of iterations, default is 100
            initial_guess: real number, initial guess for iteration, default is 1
            tol: real number, tolerance to terminate the iteration, default is 1e-14
-           printhow: integer, switch
+           printhow: integer, switch for whether to print the procedure
     Output: return sqrt of x
     """
 
@@ -65,14 +65,15 @@ def sqrt_newton(x,kmax=100,initial_guess=1,tol=1e-14,printhow=0):
 
     s = initial_guess
     for k in range(kmax):
-        print("Before iteration %2d, s = %20.15f" % (k,s))
+        if printhow != 0:
+            print("Before iteration %2d, s = %20.15f" % (k,s))
         s_old = s
         s = s - (s ** 2 - x) / (2 * x)
         if abs(s - s_old) < tol:
             break
-        print("After %2d iterations, s = %20.15f" % (k+1,s))
+        if printhow != 0:
+            print("After %2d iterations, s = %20.15f" % (k+1,s))
     return s
 
-sqrt_newton(3)
 
 
