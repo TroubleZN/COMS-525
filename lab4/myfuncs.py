@@ -64,7 +64,8 @@ def sqrt_newton(x,kmax=100,initial_guess=1,tol=1e-14,printhow=0):
         return -1.0
 
     s = initial_guess
-    for k in 
+    for k in range(kmax):
+        
 
     
 
