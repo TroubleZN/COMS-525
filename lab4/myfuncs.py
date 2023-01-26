@@ -65,7 +65,14 @@ def sqrt_newton(x,kmax=100,initial_guess=1,tol=1e-14,printhow=0):
 
     s = initial_guess
     for k in range(kmax):
-        
+        print("Before iteration %2d, s = %20.15f" % (k,s))
+        s_old = s
+        s = s - (s ** 2 - x) / (2 * x)
+        if abs(s - s_old) < tol:
+            break
+        print("After %2d iterations, s = %20.15f" % (k+1,s))
+    return s
 
-    
+sqrt_newton(3)
+
 
