@@ -1,5 +1,5 @@
 """
-My sqrt function
+My sqrt function using Newton's method
 """
 
 def factorial(n):
@@ -29,6 +29,42 @@ def exp(x, kmax=100):
         if abs(s - s_old) < 1e-16:
             break
     return expx0 * s
+
+def ln(x, kmax=100):
+    """
+    My natural logarithm function
+    """
+    s = 1.0
+    for k in range(kmax):
+        s_old = s
+        s = s_old - 1 + x * exp(-s_old)
+        if abs(s - s_old) < 1e-16:
+            break
+        
+    return s
+
+
+def sqrt_newton(x,kmax=100,initial_guess=1,tol=1e-14,printhow=0):
+    """
+    Compute the square root of a number using Newton's method
+    Input: x: real number
+           kmax: integer, the maximum number of iterations, default is 100
+           initial_guess: real number, initial guess for iteration, default is 1
+           tol: real number, tolerance to terminate the iteration, default is 1e-14
+           printhow: integer, switch
+    Output: return sqrt of x
+    """
+
+    x = 1.0*x
+
+    if x==0.0:
+        return 0.0
+    elif x<0.0:
+        print("** ERROR: input x must be non-negative **")
+        return -1.0
+
+    s = initial_guess
+    for k in 
 
     
 
