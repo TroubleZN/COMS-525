@@ -77,3 +77,23 @@ def sqrt_newton(x,kmax=100,initial_guess=1,tol=1e-14,printhow=0):
 
 
 
+def test_my():
+    import numpy as np
+    print(sqrt_newton(3.7))
+    print(sqrt_newton(3.7) - np.sqrt(3.7))
+
+    sqrt_newton(3.7, kmax=3, printhow=1)
+
+    sqrt_newton(3.7, initial_guess=2, printhow=1)
+
+    print(exp(3.7))
+    print(exp(3.7) - np.exp(3.7))
+
+    print(ln(3.7))
+    print(ln(3.7) - np.log(3.7))
+
+    print(factorial(5))
+    print(factorial(6))
+    print(factorial(7))
+
+test_my()
