@@ -54,5 +54,9 @@ A = np.array([[-2, 0, 1], [-1, 7, 1], [5, -1, 1]], dtype=float)
 b = np.matrix([-4, -50, -26], dtype=float).T
 
 from numpy.linalg import solve
-solve(A,b)
+
+print('The result from numpy solve is:')
+print(solve(A,b))
+print('The result from my solve is:')
+print(mysolve(A,b))
 
