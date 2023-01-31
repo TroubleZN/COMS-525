@@ -48,15 +48,17 @@ def mysolve(A,b):
     return x
 
 
+# The test function 
+def test():
+    A = np.array([[-2, 0, 1], [-1, 7, 1], [5, -1, 1]], dtype=float)
+    b = np.matrix([-4, -50, -26], dtype=float).T
 
+    from numpy.linalg import solve
 
-A = np.array([[-2, 0, 1], [-1, 7, 1], [5, -1, 1]], dtype=float)
-b = np.matrix([-4, -50, -26], dtype=float).T
+    print('The result from numpy solve is:')
+    print(solve(A,b))
+    print('The result from my solve is:')
+    print(mysolve(A,b))
 
-from numpy.linalg import solve
-
-print('The result from numpy solve is:')
-print(solve(A,b))
-print('The result from my solve is:')
-print(mysolve(A,b))
-
+# test function run
+test()
