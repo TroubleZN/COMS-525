@@ -26,12 +26,18 @@ def mysolve(A,b):
     if n != b.shape[0]:
         return -1
         print("The dims of the A and b are not consistent.")
+    
+    # b = np.matrix(b)
+    # if b.shape[0] == 1:
+    #     b = b.T
 
     # main body
-    m_combined = np.hstack((A, b))
+    m_combined = np.column_stack((A, b))
 
+    print('Gaussian Elimination === ') 
     for i in range(n):
-        col_i = A[:,i]
+        col_i = m_combined[:,i]
+        print('Gauss elemination along col=',i,':')
         for j in range(i,n):
             if col_i[j] != 0:
                 m_i = np.copy(m_combined[i,:])
@@ -43,8 +49,10 @@ def mysolve(A,b):
                     if k != i:
                         m_combined[k,:] -= m_combined[i,:] * m_combined[k,i]
                 break
+        print(m_combined) 
 
     x = m_combined[:,-1]
+    print('The solution is: \n', x)
     return x
 
 
@@ -60,5 +68,42 @@ def test():
     print('The result from my solve is:')
     print(mysolve(A,b))
 
-# test function run
-test()
+
+# Polynomial interpolation application
+def Poly_interp():
+    #solve the problem
+    x = np.array([-0.1, -0.02, 0.02, 0.1])
+    # x = np.array([0, 1, 2, 4])
+    n = x.size
+
+    A = np.ones((n, n))
+    A[:,0] = x**3
+    A[:,1] = x**2
+    A[:,2] = x
+
+    f = np.cos(x)
+    res = mysolve(A, f)
+
+    from numpy.linalg import solve, norm
+    print('The result from numpy solve is:')
+    x_np = solve(A,f)
+    print(x_np)
+    print('Error compuared with numpy solve is ', norm(res-x_np))
+
+
+    # plots
+    import matplotlib.pyplot as plt
+    xgrid = np.linspace(x[0], x[-1], 101)
+    f = np.cos(xgrid)
+    p = np.zeros(101)
+    for k in range(n):
+        p = p + xgrid**(n-k-1)*res[k]
+
+    plt.plot(xgrid,f,'r',xgrid,p,'o')
+    plt.show()
+
+
+# run
+if __name__ == '__main__':
+    Poly_interp()
+
