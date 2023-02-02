@@ -4,7 +4,6 @@ My Gauss elimination solver
 
 # packages
 import numpy as np
-
 def mysolve(A,b):
     """
     This is a linear solver based on Gauss elimination
@@ -61,12 +60,14 @@ def test():
     A = np.array([[-2, 0, 1], [-1, 7, 1], [5, -1, 1]], dtype=float)
     b = np.matrix([-4, -50, -26], dtype=float).T
 
-    from numpy.linalg import solve
+    from numpy.linalg import solve, norm
+
+    x_my = mysolve(A,b)
 
     print('The result from numpy solve is:')
-    print(solve(A,b))
-    print('The result from my solve is:')
-    print(mysolve(A,b))
+    x_np = solve(A,b)
+    print(x_np)
+    print('Error compuared with numpy solve is ', norm(x_my-x_np))
 
 
 # Polynomial interpolation application
@@ -106,4 +107,7 @@ def Poly_interp():
 # run
 if __name__ == '__main__':
     Poly_interp()
+
+    print('\nThe results from lab assignment 5:\n')
+    test()
 
