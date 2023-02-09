@@ -4,7 +4,7 @@
 int main()
 {
     int factorial(int n);
-    double exp(double x);
+    double myexp(double x);
 
     double x[5];
     double a;
@@ -18,12 +18,12 @@ int main()
     }
 
 
-    FILE* outfile = fopen("out1.data","w");
-    printf("\tx\texp(x)\n");
+    FILE* outfile = fopen("out.data","w");
+    printf("\nThe results are shown below: \n \nx\texp(x)\n");
     for (int i=0; i<5; i++)
     {
-        res = exp(x[i]);
-        printf("\t%lf\t%lf\n", x[i], res);
+        res = myexp(x[i]);
+        printf("%lf\t%lf\n", x[i], res);
         fprintf(outfile,"%23.16e\t%23.16e\n", x[i], res);
     }
 
@@ -33,7 +33,7 @@ int main()
 }
 
 // Exponential function based on Taylor expansions
-double exp(double x)
+double myexp(double x)
 {
     int factorial(int n);
 
