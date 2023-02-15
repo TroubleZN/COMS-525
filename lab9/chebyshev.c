@@ -20,7 +20,7 @@ int main()
 
     // read-in coefficients
     double b[Nmax+1];
-    for (int i = 0; i < N; i++)
+    for (int i = 0; i <= N; i++)
     {
         printf(" Set b[%i]: ", i);
         scanf("%lf", &b[i]);
@@ -30,9 +30,9 @@ int main()
     // set x-coordinates
     const int NumPts = 21;
     double x[NumPts];
-    for (int i = 0; i < NumP; i++)
+    for (int i = 0; i < NumPts; i++)
     {
-        x[i] = -1.0 + i*(2.0/(1.0*(NumPts-1)));
+        x[i] = -1.0 + i*(2.0/(NumPts -1));
     }
 
     // Calculate polynomial at x-coordinates
@@ -42,9 +42,67 @@ int main()
                     const double b[],
                     const double x[],
                     double y[]);
-    SamplePoly(N, NumPtsm, b, x, y);
-    
-    
-    
+    SamplePoly(N, NumPts, b, x, y);
 
+    // Write to file
+    void WritePoly(const int NumPts, const double x[], double y[]);
+    WritePoly(NumPts, x, y);
+
+    // Call python script to plot
+    system("python PlotPoly.py");
+
+    return 0;
+}
+
+void SamplePoly(const int N,
+                const int NumPts,
+                const double b[],
+                const double x[],
+                double y[])
+{
+    for (int i = 0; i < NumPts; i++)
+    {
+        const double a = x[i];
+        double phi;
+        y[i] = b[0];
+        for (int k = 1; k <= N; k++)
+        {
+            switch (k)
+            {
+                case 1:
+                    phi = a;
+                    break;
+                case 2:
+                    phi = 2*pow(a,2)-1;
+                    break;
+                case 3:
+                    phi = 4*pow(a,3)-3*a;
+                    break;
+                case 4:
+                    phi = 8*pow(a,4)-8*pow(a,2)+1;
+                    break;
+                case 5:
+                    phi = 16*pow(a,5)-20*pow(a,3)+5*a;
+                    break;
+                default:
+                    printf("\n Error \n");
+                    exit(1);
+            }
+            y[i] += b[k]*phi;
+        }
+    }
+}
+
+void WritePoly(const int NumPts, 
+               const double x[], 
+               double y[])
+{
+    FILE* outfile = fopen("poly.data", "w");
+    printf("\nThe results are shown below: \n \nx\ty\n");
+    for (int i = 0; i < NumPts; i++)
+    {
+        printf("%3.3lf\t%3.3lf\n", x[i], y[i]);
+        fprintf(outfile,"%23.16lf %23.16lf\n", x[i], y[i]);
+    }
+    fclose(outfile);
 }
