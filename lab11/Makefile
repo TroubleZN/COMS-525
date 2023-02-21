@@ -1,4 +1,4 @@
-# $ISUHPC/lectures/lecture11/codes/linked_list/Makefile
+# Study/CS525/lab11/Makefile
 CC = gcc
 FFLAGS = -O3 -Wall
 LFFLAG =
