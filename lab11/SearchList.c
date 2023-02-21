@@ -3,7 +3,7 @@
 #include "node.h"
 
 void SearchList(const node* head,
-const int key)
+const char key)
 
 {
     if (head->value==key)

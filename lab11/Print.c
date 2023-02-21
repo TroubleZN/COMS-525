@@ -7,9 +7,9 @@ void Print(const int forward, const node* head)
     if (head==NULL)
     { printf(" List is emtpy.\n\n"); return; }
     printf("\n");
-    printf(" ---------------------------------------------\n");
-    printf(" |Pos:|Val:|    Address:    |      Next:     |\n");
-    printf(" ---------------------------------------------\n");
+    printf(" ----------------------------------------------\n");
+    printf(" |Pos:|Val:|    Address:     |      Next:     |\n");
+    printf(" ----------------------------------------------\n");
     switch(forward)
     {
         case 0:
@@ -22,13 +22,13 @@ void Print(const int forward, const node* head)
             printf("\n Error: forward must be 0 or 1.\n");
             printf(" forward = %i\n",forward); exit(1);
     }
-    printf(" ---------------------------------------------\n");
+    printf(" ----------------------------------------------\n");
 }
 
 
 void PrintLine(const int pos,const int val,
 const node* head,const node* next)
-{ printf(" |%3i |%3i |%15p |%15p |\n",pos,val,head,next); }
+{ printf(" |%3i |%3c |%15p |%15p |\n",pos,val,head,next); }
 
 void PrintList(const node* head)
 {

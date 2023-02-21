@@ -7,13 +7,17 @@
 void GenerateList(node** head, const int num_nodes)
 {
     node* temp; srand( time(NULL) );
+    char alphabet[26] = { 'a', 'b', 'c', 'd', 'e', 'f', 'g',
+                          'h', 'i', 'j', 'k', 'l', 'm', 'n',
+                          'o', 'p', 'q', 'r', 's', 't', 'u',
+                          'v', 'w', 'x', 'y', 'z' };
 
     for (int i=0; i<num_nodes; i++)
     {
         temp = (node*)malloc(sizeof(node));
-        temp->value = rand()%num_nodes; 
+        temp->value = alphabet[rand()%num_nodes]; 
         temp->position = 0;
-        printf("%4i",temp->value);
+        printf("%4c",temp->value);
 
         if (*head == NULL)
         {

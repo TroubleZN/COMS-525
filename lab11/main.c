@@ -3,7 +3,7 @@
 #include "node.h"
 
 int main()
-{
+{   
     // Declare the head node in my list
     node* head = NULL;
 
@@ -18,7 +18,7 @@ int main()
     // Ask for a key, then search list
     if(num_nodes >0)
     {
-        const int key = GetKey();
+        const char key = GetKey();
         SearchList(head,key);
     }
 

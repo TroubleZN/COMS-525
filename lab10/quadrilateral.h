@@ -8,12 +8,14 @@ struct point
     double y;
 };
 
-typedef struct triangle triangle;
-struct triangle
+typedef struct quadrilateral quadrilateral;
+struct quadrilateral
 {
     point node1;
     point node2;
     point node3;
+    point node4;
+    
     double area;
     double perimeter;
 };

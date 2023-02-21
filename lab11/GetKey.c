@@ -2,9 +2,9 @@
 
 int GetKey()
 {
-    int key;
+    char key[1];
     printf("\n Enter key to search: ");
-    scanf("%i", &key);
+    scanf("%s", key);
 
-    return key;
+    return key[0];
 }
