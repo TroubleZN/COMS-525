@@ -1,5 +1,6 @@
-#include "node.h"
+#include <stdio.h>
 #include <stdlib.h>
+#include "node.h"
 
 void Print(const int forward, const node* head)
 {

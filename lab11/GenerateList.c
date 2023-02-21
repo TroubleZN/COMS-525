@@ -1,5 +1,8 @@
-#include "node.h"
+#include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
+#include "node.h"
+
 
 void GenerateList(node** head, const int num_nodes)
 {
