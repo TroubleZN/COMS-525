@@ -11,7 +11,8 @@ void GenerateList(node** head, const int num_nodes)
     for (int i=0; i<num_nodes; i++)
     {
         temp = (node*)malloc(sizeof(node));
-        temp->value = rand()%num_nodes; temp->position = 0;
+        temp->value = rand()%num_nodes; 
+        temp->position = 0;
         printf("%4i",temp->value);
 
         if (*head == NULL)

@@ -8,7 +8,7 @@ void Print(const int forward, const node* head)
     { printf(" List is emtpy.\n\n"); return; }
     printf("\n");
     printf(" ---------------------------------------------\n");
-    printf(" |Pos:|Val:| Address: | Next: |\n");
+    printf(" |Pos:|Val:|    Address:    |      Next:     |\n");
     printf(" ---------------------------------------------\n");
     switch(forward)
     {
