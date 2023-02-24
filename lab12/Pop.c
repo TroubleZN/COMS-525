@@ -1,8 +1,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "node.h"
+#include <string.h>
 
-void Pop(node** top, int* output)
+void Pop(node** top, char *firstname, char *lastname, char *netid)
 {
     node* temp = *top;
 
@@ -10,7 +11,9 @@ void Pop(node** top, int* output)
     { return; }
     else
     { temp = temp->next; }
-    *output = (*top)->value;
+    strcpy(firstname, (*top)->firstname);
+    strcpy(lastname, (*top)->lastname);
+    strcpy(netid, (*top)->netid);
     free(*top);
     *top = temp;
 
