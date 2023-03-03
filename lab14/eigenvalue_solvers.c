@@ -17,47 +17,188 @@ double power_iteration(vector *v, matrix *A, double TOL, int MaxIters)
     */
 
     double lambda;
+    double lambda_old;
     int mstop = 0; 
     int k = 0;
 
-    const int rows = A->rows;
+    // const int rows = A->rows;
     const int size = v->size;
-    double v_norm = vector_norm(&v);
 
+    double v_norm = vector_norm(v);
     for (int i=1; i<=size; i++)
     {
-        vgetp(v, i) = vegtp(v, i) / v_norm;
+        vgetp(v, i) = vgetp(v, i) / v_norm;
     }
 
-    matrix v_m = vector_to_matrix(&v);
+    matrix v_m = vector_to_matrix(v);
     matrix v_m_prim = matrix_trans(&v_m);
-    matrix lambda_t = matrix_mult(&v_m_prim, &A);
-    vector lambda_m = matrix_vector_mult(&lambda_t, &v);
+    matrix lambda_t = matrix_mult(&v_m_prim, A);
+    vector lambda_m = matrix_vector_mult(&lambda_t, v);
     lambda = vget(lambda_m, 1);
-
-
+    
+    vector w;
+    double w_norm;
 
     while (mstop == 0)
-    {
+    {   
         k += 1;
+        lambda_old = lambda;
+        w = matrix_vector_mult(A, v);
+        w_norm = vector_norm(&w);
+        for (int i=1; i<=size; i++)
+        {
+            vgetp(v, i) = vget(w, i) / w_norm;
+        }
 
+        v_m = vector_to_matrix(v);
+        v_m_prim = matrix_trans(&v_m);
+        lambda_t = matrix_mult(&v_m_prim, A);
+        lambda_m = matrix_vector_mult(&lambda_t, v);
+        lambda = vget(lambda_m, 1);
+
+        if (fabs(lambda - lambda_old) < TOL || k == MaxIters)
+        { mstop = 1; }
     }
-    
-
+    return lambda;
 }
 
-double shifted_inverse_power_iteration(vector *v, matrix *A, double TOL, int MaxIters)
+double shifted_inverse_power_iteration(double mu, vector *v, matrix *A, double TOL, int MaxIters)
 {
     /*
-    Shifted inverse power_iteration for computing largest eigenvalue
+    Shifted inverse power iteration for computing the closest eigenvalue to μ 
+    Input:
+        mu: 
+        v: initial guess, vector
+        A: the matrix, matrix
+        TOL: tolerance for checking convergence (difference between succesive iterations), double
+        MaxIters: Max number of iterations allowed
+    Output:
+        return the eigenvalue closest to μ 
+    */
+
+    double lambda;
+    double lambda_old;
+    int mstop = 0; 
+    int k = 0;
+
+    // const int rows = A->rows;
+    const int size = v->size;
+
+    double v_norm = vector_norm(v);
+    for (int i=1; i<=size; i++)
+    {
+        vgetp(v, i) = vgetp(v, i) / v_norm;
+    }
+
+    matrix v_m = vector_to_matrix(v);
+    matrix v_m_prim = matrix_trans(&v_m);
+    matrix lambda_t = matrix_mult(&v_m_prim, A);
+    vector lambda_m = matrix_vector_mult(&lambda_t, v);
+    lambda = vget(lambda_m, 1);
+    
+    vector w;
+    double w_norm;
+    matrix A_new;
+
+    matrix muI = new_matrix(size, size);
+    for (int i=1; i<=size; i++)
+    { mget(muI, i, i) = mu; }
+
+    while (mstop == 0)
+    {   
+        k += 1;
+        lambda_old = lambda;
+        
+        A_new = matrix_sub(A, &muI);
+        w = solve(&A_new, v);
+
+        w_norm = vector_norm(&w);
+        for (int i=1; i<=size; i++)
+        {
+            vgetp(v, i) = vget(w, i) / w_norm;
+        }
+
+        v_m = vector_to_matrix(v);
+        v_m_prim = matrix_trans(&v_m);
+        lambda_t = matrix_mult(&v_m_prim, A);
+        lambda_m = matrix_vector_mult(&lambda_t, v);
+        lambda = vget(lambda_m, 1);
+
+        if (fabs(lambda - lambda_old) < TOL || k == MaxIters)
+        { mstop = 1; }
+    }
+    return lambda;
+}
+
+
+double rayleigh_quotient_iteration(vector *v, matrix *A, double TOL, int MaxIters)
+{
+    /*
+    Rayleigh Quotient Iteration for some eigenvalue of A after k iterations
     Input:
         v: initial guess, vector
         A: the matrix, matrix
         TOL: tolerance for checking convergence (difference between succesive iterations), double
         MaxIters: Max number of iterations allowed
     Output:
-        return largest eigenvalue in magnitude
+        return some eigenvalue of A
     */
 
+    double lambda;
+    double lambda_old;
+    int mstop = 0; 
+    int k = 0;
 
+    // const int rows = A->rows;
+    const int size = v->size;
+
+    double v_norm = vector_norm(v);
+    for (int i=1; i<=size; i++)
+    {
+        vgetp(v, i) = vgetp(v, i) / v_norm;
+    }
+
+    matrix v_m = vector_to_matrix(v);
+    matrix v_m_prim = matrix_trans(&v_m);
+    matrix lambda_t = matrix_mult(&v_m_prim, A);
+    vector lambda_m = matrix_vector_mult(&lambda_t, v);
+    lambda = vget(lambda_m, 1);
+    
+    printf("\n  The initial lambda is %f.\n", lambda);
+
+    vector w;
+    double w_norm;
+    matrix A_new;
+
+    matrix lambdaI = new_matrix(size, size);
+
+    while (mstop == 0)
+    {   
+        k += 1;
+        lambda_old = lambda;
+        
+        for (int i=1; i<=size; i++)
+        { mget(lambdaI, i, i) = lambda; }
+
+        A_new = matrix_sub(A, &lambdaI);
+        for (int i=1; i<=size; i++)
+        { mget(lambdaI, i, i) = lambda; }   
+        w = solve(&A_new, v);
+        
+        w_norm = vector_norm(&w);
+        for (int i=1; i<=size; i++)
+        {
+            vgetp(v, i) = vget(w, i) / w_norm;
+        }
+
+        v_m = vector_to_matrix(v);
+        v_m_prim = matrix_trans(&v_m);
+        lambda_t = matrix_mult(&v_m_prim, A);
+        lambda_m = matrix_vector_mult(&lambda_t, v);
+        lambda = vget(lambda_m, 1);
+
+        if (fabs(lambda - lambda_old) < TOL || k == MaxIters)
+        { mstop = 1; }
+    }
+    return lambda;
 }
