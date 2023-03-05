@@ -43,7 +43,7 @@ int main()
     { vget(v,i) = rand(); }
 
     double res3 = rayleigh_quotient_iteration(&v, &M, 1.0e-6, 100);
-    printf("  The random eigen value is %3.3f.\n", res3);
+    printf("\n  The random eigen value is %3.3f.\n", res3);
 
     v = new_vector(N);
     for (int i=1; i<=N; i++)

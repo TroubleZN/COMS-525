@@ -16,7 +16,7 @@ double power_iteration(vector *v, matrix *A, double TOL, int MaxIters)
         return largest eigenvalue in magnitude
     */
 
-    double lambda;
+    double lambda = 0;
     double lambda_old;
     int mstop = 0; 
     int k = 0;
@@ -24,18 +24,10 @@ double power_iteration(vector *v, matrix *A, double TOL, int MaxIters)
     // const int rows = A->rows;
     const int size = v->size;
 
-    double v_norm = vector_norm(v);
-    for (int i=1; i<=size; i++)
-    {
-        vgetp(v, i) = vgetp(v, i) / v_norm;
-    }
-
-    matrix v_m = vector_to_matrix(v);
-    matrix v_m_prim = matrix_trans(&v_m);
-    matrix lambda_t = matrix_mult(&v_m_prim, A);
-    vector lambda_m = matrix_vector_mult(&lambda_t, v);
-    lambda = vget(lambda_m, 1);
-    
+    matrix v_m;
+    matrix v_m_prim;
+    matrix lambda_t;
+    vector lambda_m;
     vector w;
     double w_norm;
 
@@ -76,7 +68,7 @@ double shifted_inverse_power_iteration(double mu, vector *v, matrix *A, double T
         return the eigenvalue closest to μ 
     */
 
-    double lambda;
+    double lambda = 0;
     double lambda_old;
     int mstop = 0; 
     int k = 0;
@@ -84,18 +76,10 @@ double shifted_inverse_power_iteration(double mu, vector *v, matrix *A, double T
     // const int rows = A->rows;
     const int size = v->size;
 
-    double v_norm = vector_norm(v);
-    for (int i=1; i<=size; i++)
-    {
-        vgetp(v, i) = vgetp(v, i) / v_norm;
-    }
-
-    matrix v_m = vector_to_matrix(v);
-    matrix v_m_prim = matrix_trans(&v_m);
-    matrix lambda_t = matrix_mult(&v_m_prim, A);
-    vector lambda_m = matrix_vector_mult(&lambda_t, v);
-    lambda = vget(lambda_m, 1);
-    
+    matrix v_m;
+    matrix v_m_prim;
+    matrix lambda_t;
+    vector lambda_m;    
     vector w;
     double w_norm;
     matrix A_new;
@@ -144,32 +128,21 @@ double rayleigh_quotient_iteration(vector *v, matrix *A, double TOL, int MaxIter
         return some eigenvalue of A
     */
 
-    double lambda;
+    double lambda = 0;
     double lambda_old;
     int mstop = 0; 
     int k = 0;
 
     // const int rows = A->rows;
     const int size = v->size;
-
-    double v_norm = vector_norm(v);
-    for (int i=1; i<=size; i++)
-    {
-        vgetp(v, i) = vgetp(v, i) / v_norm;
-    }
-
-    matrix v_m = vector_to_matrix(v);
-    matrix v_m_prim = matrix_trans(&v_m);
-    matrix lambda_t = matrix_mult(&v_m_prim, A);
-    vector lambda_m = matrix_vector_mult(&lambda_t, v);
-    lambda = vget(lambda_m, 1);
     
-    printf("\n  The initial lambda is %f.\n", lambda);
-
+    matrix v_m;
+    matrix v_m_prim;
+    matrix lambda_t;
+    vector lambda_m;    
     vector w;
     double w_norm;
     matrix A_new;
-
     matrix lambdaI = new_matrix(size, size);
 
     while (mstop == 0)
@@ -180,9 +153,7 @@ double rayleigh_quotient_iteration(vector *v, matrix *A, double TOL, int MaxIter
         for (int i=1; i<=size; i++)
         { mget(lambdaI, i, i) = lambda; }
 
-        A_new = matrix_sub(A, &lambdaI);
-        for (int i=1; i<=size; i++)
-        { mget(lambdaI, i, i) = lambda; }   
+        A_new = matrix_sub(A, &lambdaI); 
         w = solve(&A_new, v);
         
         w_norm = vector_norm(&w);
