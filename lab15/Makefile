@@ -4,7 +4,12 @@ FFLAGS = -O3 -Wall -std=c99
 LFFLAG =
 OBJECTS = main.o \
 matrix.o \
-eigenvalue_solvers.o
+eigenvalue_solvers.o \
+trimatrix.o \
+QRdecomp.o \
+Hessenberg.o \
+QRA.o
+
 
 
 .PHONY: clean

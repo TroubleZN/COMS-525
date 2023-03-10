@@ -44,5 +44,6 @@ vector solve(const matrix* A, const vector* b);
 double rayleigh_quotient_iteration(vector *v, matrix *A, double TOL, int MaxIters);
 double power_iteration(vector *v, matrix *A, double TOL, int MaxIters);
 double shifted_inverse_power_iteration(double mu, vector *v, matrix *A, double TOL, int MaxIters);
-
+void delete_matrix(matrix* A);
+void delete_vector(vector* v);
 #endif

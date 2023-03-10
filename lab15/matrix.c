@@ -292,3 +292,13 @@ vector solve(const matrix* A, const vector* b)
 
     return x;
 }
+
+void delete_matrix(matrix* A)
+{
+    free(A->val);
+}
+
+void delete_vector(vector* v)
+{
+    free(v->val);
+}
