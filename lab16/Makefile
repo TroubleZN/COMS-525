@@ -1,6 +1,6 @@
 CC = gcc
 FFLAGS = -Wall -std=c99 -Xpreprocessor -fopenmp
-LFLAGS = -lomp
+LFLAGS = -lgomp
 
 
 OBJECTS = omp_hello.o
