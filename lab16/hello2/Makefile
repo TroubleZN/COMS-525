@@ -1,5 +1,5 @@
 CC = gcc
-FFLAGS = -Wall -std=c99 -Xpreprocessor -fopenmp
+FFLAGS = -Wall -std=c99 -fopenmp
 LFLAGS = -lgomp
 
 
@@ -12,4 +12,5 @@ main.exe: $(OBJECTS)
 	$(CC) $(FFLAGS) -c $<
 
 clean :
-	rm -f $(OBJECTS) *.exe
+	rm -f $(OBJECTS) *.exe *.out *.txt
+

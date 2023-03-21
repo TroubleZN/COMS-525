@@ -26,7 +26,7 @@ int main(int argc, char* argv[])
     {
         const double x = ((double)(i))/((double)(N)); 
         double sum = 1.0;
-        for (int k=1; k<=200; k++)
+        for (int k=1; k<=10000; k++)
         {
             sum += sqrt(pow(x,k+2) + pow(x,k+1) + pow(x,k) + pow(x,k-1));
         }

@@ -30,3 +30,4 @@ void hello ()
 
     printf(" Hello from thread %i of %i\n", my_rank +1, actual_thread_count );
 }
+

@@ -28,6 +28,7 @@ void usage(const char *prog_name)
     fprintf(stderr, " thread_count should be positive\n");
     exit(1);
 }
+
 void hello(const int thread_count) 
 {
 #   ifdef _OPENMP
@@ -42,3 +43,4 @@ void hello(const int thread_count)
     }
     printf(" Hello from thread %i of %i\n", my_rank+1, actual_thread_count);
 }
+
