@@ -3,7 +3,8 @@ FFLAGS = -Wall -std=c99 -fopenmp
 LFLAGS = -lgomp -lm
 
 
-OBJECTS = main.o
+OBJECTS = forloop.o \
+	  matrix.o
 
 main.exe: $(OBJECTS)
 	$(CC) $(LFLAGS) $(OBJECTS) -o main.exe
@@ -12,5 +13,5 @@ main.exe: $(OBJECTS)
 	$(CC) $(FFLAGS) -c $<
 
 clean :
-	rm -f $(OBJECTS) *.exe
+	rm -f $(OBJECTS) *.exe *.txt *.out
 

@@ -1,0 +1,1 @@
+ With 4 threads, clock_time = 1.71887e-02 (sec), N = 100000, k = 200, the 1-norm of w is 54.612543

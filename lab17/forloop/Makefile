@@ -1,5 +1,5 @@
 CC = gcc
-FFLAGS = -Wall -std=c99 -fopenmp
+FFLAGS = -Wall -std=c99 -Xpreprocessor -fopenmp
 LFLAGS = -lgomp -lm
 
 

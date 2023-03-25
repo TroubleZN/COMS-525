@@ -1,1 +1,0 @@
- With 16 threads, clock_time = 5.74979e-01 (sec)

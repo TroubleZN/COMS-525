@@ -1,1 +1,0 @@
- With 32 threads, clock_time = 3.20063e-01 (sec)

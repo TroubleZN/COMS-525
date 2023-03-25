@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <unistd.h>
 #ifdef _OPENMP
 #   include <omp.h>
 #endif
@@ -9,7 +10,8 @@
 int main(int argc, char* argv[]) 
 {
     void usage(const char* prog_name);
-    void CompTrap(const double a,const double b,const int N,double* T);
+    double matrix_vector_product_norm(const int N, const int k);
+    void comp_norm(const int N, double *w, double *norm);
 
     if (argc != 4) { usage(argv[0]); }
     const int thread_count = strtol(argv[1], NULL, 10);
@@ -19,31 +21,19 @@ int main(int argc, char* argv[])
     if (thread_count<1 || N<1 || k<1)
     { usage(argv[0]); }
     
-    double* A[N][k];
-    double* v[k];
-    for (int j=0; j<k; j++)
-    {   
-        v[k] = rand() % 100000;
-        for (int i=0; i<N; i++)
-        {
-            A[i][j] = rand() % 100000;
-        }
-    }
+    double norm = 0.0;
     
-    double T = 0.0;
-
     const double time1 = omp_get_wtime();
-
 #   pragma omp parallel num_threads(thread_count)
-    CompTrap(a,b,N,&T);
-
+    {
+        double norm_local = matrix_vector_product_norm(N, k);
+#       pragma omp critical
+        norm += norm_local;
+    }    
     const double time2 = omp_get_wtime();
+    double clock_time = time2 - time1;
 
-    double Iex = exp(1.0); double err = fabs(T-Iex);
-    
-    printf("\n N = %i, T = %23.15e, err = %12.5e,\n",N,T,err);
-    printf(" time = %12.5e\n\n",time2-time1);
-
+    printf(" With %i threads, clock_time = %11.5e (sec), N = %i, k = %i, the 1-norm of w is %f\n", thread_count ,clock_time, N, k, norm);
     return 0;
 }
 
@@ -53,10 +43,12 @@ void usage(const char *prog_name)
     fprintf(stderr,"    num_threads should be positive\n");
     fprintf(stderr,"    num_row should be positive\n");
     fprintf(stderr,"    num_col should be positive\n");
+    fprintf(stderr,"    num_threads should smaller than num_row\n");
+    fprintf(stderr,"    mod(num_row, num_threads) != 0\n");
     exit(1);
 }
 
-void matrix_vector_product(const double a, const double b, const int N, double* T_global)
+double matrix_vector_product_norm(const int N, const int k)
 {
 #   ifdef _OPENMP
     const int my_rank = omp_get_thread_num();
@@ -66,28 +58,28 @@ void matrix_vector_product(const double a, const double b, const int N, double* 
     const int thread_count = 1;
 #   endif
 
-    double func(const double x);
-    double h = (b-a)/((double)N);
+    int local_N = N/thread_count;
+    
+    int i_start = my_rank*local_N + 1;
+    int i_end = (my_rank+1)*local_N;
 
-    double local_N = N/thread_count;
-    double local_a = a + my_rank*local_N*h;
-    double local_b = local_a + local_N*h;
+    double w_local[N];
 
-    double T_local = 0.5*(func(local_a)+func(local_b));
-    double x_local = local_a;
+    for (int i=i_start; i<=i_end; i++) 
+    {   
+        w_local[i-1] = 0.0;
+        for (int j=1.0; j<=k; j++)
+        {
+            w_local[i-1] += 1.0/(i+j-1.0) / j;
+        }
 
-    for (int i=1; i<local_N; i++)
-    {
-        x_local += h;
-        T_local += func(x_local); 
+// #       pragma omp critical
+//         *norm += fabs(w_i);
     }
-
-#   pragma omp critical
-    *T_global += h*T_local; 
+    double norm_local = 0.0;
+    for (int i=i_start; i<=i_end; i++) 
+    {  
+        norm_local += fabs(w_local[i-1]);
+    }
+    return norm_local;
 }
-
-double func(const double x)
-{
-    return (1.0 + exp(x));
-}
-
