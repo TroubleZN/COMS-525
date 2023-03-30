@@ -1,0 +1,7 @@
+                                Input N = 1000000
+                   norm frin fine grain = 1000.000000
+                 norm frin coarse grain = 1000.000000
+ difference (Fine grain)-(Coarse grain) = 0.000000
+                    Time for fine grain = 4.68205e-03 (sec)
+                  Time for coarse grain = 4.34266e-03 (sec)
+                  Number of Threads Run = 4
