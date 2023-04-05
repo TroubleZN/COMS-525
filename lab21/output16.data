@@ -1,0 +1,11 @@
+export TMOUT=5400
+export TMPDIR=/mnt/bgfs/zhengni/4412343
+export PTMPDIR=/mnt/bgfs/zhengni/4412343/ptmp
+ Before normalization:
+  The first element is  1.0000000000000e+00 
+  The last element is  1.2649110640674e+03
+ After normalization:
+  The first element is  8.8388320026973e-07 
+  The last element is  1.1180336393644e-03
+ NP = 16, N = 1600000, norm_squared =  1.2800008000000e+12, norm =  1.1313712034518e+06
+ Elapsed time =  1.3162436895072e-02
