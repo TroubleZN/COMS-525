@@ -1,0 +1,55 @@
+export TMOUT=5400
+export TMPDIR=/mnt/bgfs/zhengni/4416475
+export PTMPDIR=/mnt/bgfs/zhengni/4416475/ptmp
+ Before normalization:
+  The first element is  1.0000000000000e+00 
+  The last element is  1.2649110640674e+03
+ After normalization:
+  The first element is  8.8388320026973e-07 
+  The last element is  1.1180336393644e-03
+ NP =  2, N = 1600000, norm_squared =  1.2800008000000e+12, norm =  1.1313712034518e+06
+ Elapsed time =  1.5418231836520e-02
+export TMOUT=5400
+export TMPDIR=/mnt/bgfs/zhengni/4416475
+export PTMPDIR=/mnt/bgfs/zhengni/4416475/ptmp
+ Before normalization:
+  The first element is  1.0000000000000e+00 
+  The last element is  1.2649110640674e+03
+ After normalization:
+  The first element is  8.8388320026973e-07 
+  The last element is  1.1180336393644e-03
+ NP =  4, N = 1600000, norm_squared =  1.2800008000000e+12, norm =  1.1313712034518e+06
+ Elapsed time =  8.6702243424952e-03
+export TMOUT=5400
+export TMPDIR=/mnt/bgfs/zhengni/4416475
+export PTMPDIR=/mnt/bgfs/zhengni/4416475/ptmp
+ Before normalization:
+  The first element is  1.0000000000000e+00 
+  The last element is  1.2649110640674e+03
+ After normalization:
+  The first element is  8.8388320026973e-07 
+  The last element is  1.1180336393644e-03
+ NP =  8, N = 1600000, norm_squared =  1.2800008000000e+12, norm =  1.1313712034518e+06
+ Elapsed time =  4.8774412134662e-03
+export TMOUT=5400
+export TMPDIR=/mnt/bgfs/zhengni/4416475
+export PTMPDIR=/mnt/bgfs/zhengni/4416475/ptmp
+ Before normalization:
+  The first element is  1.0000000000000e+00 
+  The last element is  1.2649110640674e+03
+ After normalization:
+  The first element is  8.8388320026973e-07 
+  The last element is  1.1180336393644e-03
+ NP = 16, N = 1600000, norm_squared =  1.2800008000000e+12, norm =  1.1313712034518e+06
+ Elapsed time =  2.8411326929927e-03
+export TMOUT=5400
+export TMPDIR=/mnt/bgfs/zhengni/4416475
+export PTMPDIR=/mnt/bgfs/zhengni/4416475/ptmp
+ Before normalization:
+  The first element is  1.0000000000000e+00 
+  The last element is  1.2649110640674e+03
+ After normalization:
+  The first element is  8.8388320026973e-07 
+  The last element is  1.1180336393644e-03
+ NP = 32, N = 1600000, norm_squared =  1.2800008000000e+12, norm =  1.1313712034518e+06
+ Elapsed time =  2.3385492386296e-03
